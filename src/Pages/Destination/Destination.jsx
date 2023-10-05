@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Navbar from '../../Shared/Navbar';
 import { FaArrowRight } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 
 const Destination = () => {
@@ -58,7 +59,7 @@ const Destination = () => {
                                 </div>
                                 
                                 <div className="form-control mt-6">
-                                    <button className="btn btn-primary bg-yellow-500 border-none text-black">Start Booking</button>
+                                    <button className="btn btn-primary bg-yellow-500 border-none text-black"><Link to="/search">Start Booking</Link></button>
                                 </div>
                             </form>
                         </div>
