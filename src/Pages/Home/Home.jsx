@@ -3,6 +3,7 @@ import Navbar from '../../Shared/Navbar';
 import { FaArrowRight } from 'react-icons/fa';
 import Slider from '../../components/SlideCard';
 import SlideCard from '../../components/SlideCard';
+import { Helmet } from 'react-helmet-async';
 
 
 
@@ -10,10 +11,16 @@ const Home = () => {
     return (
 
         <div>
+            <Helmet>
+                <title>goTrip</title>
+            </Helmet>
+
             <div className="items-center bg-blend-overlay bg-opacity-80 bg-black bg-center bg-cover min-h-screen w-full" style={{ backgroundImage: 'url(https://i.ibb.co/F4dCDQz/Rectangle-1.png)' }}>
                 <div className='container mx-auto'>
-                    <Navbar></Navbar>
-                    <div className='grid grid-cols-3 min-h-screen items-center'>
+                    <div className="text-white">
+                        <Navbar></Navbar>
+                    </div>
+                    <div className='px-12 mx-auto grid grid-cols-3 min-h-screen items-center'>
                         <div className=' text-white '>
                             <p className='font-bebas text-8xl'>cox's bazar</p>
                             <p className='font-montserrat text-xl'>
