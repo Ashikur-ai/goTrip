@@ -1,13 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Navbar from '../../Shared/Navbar';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
-    const { googleSignIn, githubSignIn } = useContext(AuthContext);
+    
+    const { googleSignIn, githubSignIn, EmailLogIn } = useContext(AuthContext);
+
+    const [isShow, setIsShow] = useState(true);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -27,35 +31,63 @@ const Login = () => {
         })
     }
 
+    const handleLogIn = (e) => {
+        e.preventDefault();
+        const form = new FormData(e.currentTarget);
+        const email = form.get('email');
+        const password = form.get('password');
+        console.log(email, password);
+        EmailLogIn(email, password)
+            .then(result => {
+                toast.success('Logged in successful');
+                navigate(location?.state ? location.state : '/');
+                console.log(result.user);
+            })
+            .catch(error => {
+            console.log(error);
+        })
+    }
     
 
     return (
         <div>
+            <Helmet>
+                <title>goTrip - Login</title>
+            </Helmet>
             <div className='container mx-auto'>
                 <div className='text-black'>
                     <Navbar></Navbar>
                 </div>
             </div>
             <div className='w-1/2 mx-auto  mt-28'>
-                <form className="card-body border rounded-lg border-black">
+                <form onSubmit={handleLogIn} className="card-body border rounded-lg border-black">
                     <p className='p-3 font-bold text-2xl'>Login</p>
 
                     <div className="form-control">
                         
-                        <input type="text" name='origin' placeholder="Username or Email" className="input " required />
+                        <input type="email" name='email' placeholder="Username or Email" className="input " required />
                         <div className="divider "></div>
                     </div>
 
-                    <div className="form-control">
+                    <div className="relative form-control">
 
-                        <input type="text" name='origin' placeholder="Password" className="input " required />
+                        <input type={isShow ? "text" : "password"} name='password' placeholder="Password" className=" input " required />
+                        {
+                            isShow ? 
+                                <span onClick={()=>setIsShow(!isShow)}><FaEyeSlash className='absolute right-3'></FaEyeSlash></span>
+                                :
+                                <span onClick={()=>setIsShow(!isShow)}><FaEye className='absolute right-3'></FaEye></span>
+                                
+                                
+                        }
+                        
                         <div className="divider "></div>
 
                     </div>
 
                     <div className='flex justify-between'>
                         <div className='flex gap-2'>
-                            <input type="checkbox" />
+                            <input type="checkbox" required />
                             <p>Remember Me</p>
                         </div>
                         <div>

@@ -4,6 +4,7 @@ import { FaArrowRight } from 'react-icons/fa';
 import Slider from '../../components/SlideCard';
 import SlideCard from '../../components/SlideCard';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 
 
 
@@ -26,7 +27,7 @@ const Home = () => {
                             <p className='font-montserrat text-xl'>
                                 Cox's Bazar is a city, fishing port, tourism centre and district headquarters in southeastern Bangladesh. It is famous mostly for its long natural sandy beach, and it ...
                             </p>
-                            <a className="btn  bg-yellow-500 border-none px-10">Booking <FaArrowRight></FaArrowRight></a>
+                            <Link to="/search" className="btn  bg-yellow-500 border-none px-10">Booking <FaArrowRight></FaArrowRight></Link>
                         </div>
                         <div className='col-span-2 ml-10'>
                             <SlideCard></SlideCard>

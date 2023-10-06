@@ -55,7 +55,7 @@ const Navbar = () => {
                 {
                     user ? 
                         <>
-                            <p>{user.displayName}</p>
+                            <p>{user.displayName ? user.displayName: user.email}</p>
                             <a onClick={handleLogOut} className="btn btn-sm bg-yellow-500 border-none ml-4">Logout</a>
                         </>
                         
