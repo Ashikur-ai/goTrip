@@ -1,10 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Navbar from '../../Shared/Navbar';
-import { FaFacebook } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from "react-icons/fc";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Login = () => {
+    const { googleSignIn, githubSignIn } = useContext(AuthContext);
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log(location);
+
+    const handleSocialSignIn = (media) => {
+        media()
+            .then(result => {
+                console.log(result.user);
+                toast.success('Logged in successful');
+                navigate(location?.state ? 
+                    location.state : '/'
+                    )
+            })
+            .catch(error => {
+            console.log(error);
+        })
+    }
+
+    
+
     return (
         <div>
             <div className='container mx-auto'>
@@ -58,11 +82,11 @@ const Login = () => {
                 </div>
 
                 <div>
-                    <button className=" btn btn-outline  w-full rounded-full"> <FaFacebook className='text-3xl text-blue-700'></FaFacebook> Continue with Facebook</button>
+                    <button onClick={()=>handleSocialSignIn(githubSignIn)} className=" btn btn-outline  w-full rounded-full"> <FaGithub className='text-3xl text-green-700'></FaGithub> Continue with Github</button>
                 </div>
                 
                 <div className=''>
-                    <button className=" btn btn-outline mt-4 w-full rounded-full"> <FcGoogle className='text-3xl'></FcGoogle> Continue with Facebook</button>
+                    <button onClick={()=>handleSocialSignIn(googleSignIn)} className=" btn btn-outline mt-4 w-full rounded-full"> <FcGoogle className='text-3xl'></FcGoogle> Continue with Google</button>
                 </div>
                 <div className='pb-40'></div>
             </div>

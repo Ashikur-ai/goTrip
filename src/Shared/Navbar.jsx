@@ -1,10 +1,27 @@
+import { useContext } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../AuthProvider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                toast.error('logged out successful');
+            })
+            .catch(error => {
+            console.log(error);
+        })
+    }
+
+    
+
     const navLinks =
         <>
-            <li> <NavLink to='/news'>News</NavLink> </li>
+            <li > <button>News</button> </li>
             <li> <NavLink to='/destination'>Destination</NavLink> </li>
             <li> <NavLink to='/blog'>Blog</NavLink> </li>
             <li> <NavLink to='/contact'>Contact</NavLink> </li>
@@ -35,7 +52,19 @@ const Navbar = () => {
                 <ul className="menu hidden lg:flex menu-horizontal px-10">
                     {navLinks}
                 </ul>
-                <Link to="/login" className="btn btn-sm bg-yellow-500 border-none">Login</Link>
+                {
+                    user ? 
+                        <>
+                            <p>{user.displayName}</p>
+                            <a onClick={handleLogOut} className="btn btn-sm bg-yellow-500 border-none ml-4">Logout</a>
+                        </>
+                        
+                            :
+                        <Link to="/login" className="btn btn-sm bg-yellow-500 border-none">Login</Link>
+                        
+
+                }
+                
             </div>
         </div>
     );

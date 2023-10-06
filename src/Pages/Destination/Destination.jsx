@@ -9,7 +9,7 @@ const Destination = () => {
     return (
         <div>
             <Helmet>
-                <title>goTrip</title>
+                <title>goTrip - Destination</title>
             </Helmet>
 
             <div className="items-center bg-blend-overlay bg-opacity-80 bg-black bg-center bg-cover min-h-screen w-full" style={{ backgroundImage: 'url(https://i.ibb.co/F4dCDQz/Rectangle-1.png)' }}>
@@ -59,7 +59,7 @@ const Destination = () => {
                                 </div>
                                 
                                 <div className="form-control mt-6">
-                                    <button className="btn btn-primary bg-yellow-500 border-none text-black"><Link to="/search">Start Booking</Link></button>
+                                    <button className="btn bg-yellow-500 border-none text-black"><Link to="/search">Start Booking</Link></button>
                                 </div>
                             </form>
                         </div>
